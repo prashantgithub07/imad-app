@@ -30,9 +30,7 @@ var htmlTemplate = `<html>
             ${title}
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
             <link href="/ui/style.css" rel="stylesheet" />
-        </style>
     </head>
     <body>
         <div class="container">
