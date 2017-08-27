@@ -1,17 +1,27 @@
 // Counter Code
-var button = document.getElementById('counter');
-var counter = 0;
+var button = document.getElementById('counter'); 
 button.onclick = function () {
     
-    //make request to counter end point
+    //create request object
+    var request = new XMLHttpRequest();
     
     
     //cpture the response and store it in variable
+    request.onreadystatechange = function () {
+      if (request.readystate === XMLHttpRequest.DONE) {
+          //Take some action
+          if (request.status === 200) {
+              var counter = request.responseText;
+              var span = document.getElementById('count');
+              span.innerHTML = counter.toString();
+          }
+      } 
+      //not done yet
+        
+    };
     
-    
-    // Render the variable in the correnct span
-    counter = counter + 1;
-    var span = document.getElementById('count');
-    span.innerHTML = counter.toString();
-    
+    //Make the request 
+    request.open('GET', 'http://pdbbhole.imad.hasura-app.io/counter', true);
+    request.send(null);
+     
 };
