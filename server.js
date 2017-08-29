@@ -74,7 +74,7 @@ var htmlTemplate = `<html>
             ${heading}
         </h3>
         <div>
-            ${date}
+            ${date.toDataString()}
         </div>
         <div>
             ${content}
