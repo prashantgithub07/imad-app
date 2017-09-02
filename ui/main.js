@@ -63,12 +63,12 @@ register.onclick = function () {
           // Take some action
           if (request.status === 200) {
               alert('User created successfully');
-          } else if (request.status === 500) {
+         register.value = 'Registered!';
+             } else {
               alert('Could not register the user');
+              register.value = 'Register';
           }
-          register.value = 'Register';
-      }  
-      // Not done yet
+    }  
     };
     
     // Make the request
