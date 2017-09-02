@@ -23,12 +23,17 @@ var loginHtml = `
          // Take some action
          if (request.status === 200) {
           alert('Logged in successfully');
+          submit.value = 'Sucess!';
          } else if (request.status === 403) {
          alert('Username/password is incorrect');
+         submit.value = 'Login';
          } else if (request.status === 500) {
          alert('Something went wrong on the server');
+         submit.value = 'Login';
+              } else {
+                  submit.value = 'Login';
           }
-          submit.value = 'Login';
+          loadLogin();
       } 
       //not done yet
         
@@ -43,7 +48,6 @@ var loginHtml = `
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));
     submit.value = 'Logging in...';
-    loadLogin();
    
 };
 
