@@ -4,7 +4,7 @@
  function loadCommentForm () {
      var commentFormHtml = `
          <h5>Submit a comment</h5>
-         <textarea id="comment-text" placeholder="Enter your comment here..." />
+         <textarea id="comment_text" placeholder="Enter your comment here..." />
          <input type="submit" id="submit" value="Submit" />
          `;
      document.getElementById('comment_form').innerHTML = loginHtml;
@@ -29,7 +29,7 @@
          };
          
          // Make the request
-         var comment = document.getElementById('comment-text').value;
+         var comment = document.getElementById('comment_text').value;
         request.open('POST', '/submit-comment/' + currentArticleTitle, true);
          request.setRequestHeader('Content-Type', 'application/json');
          request.send(JSON.stringify({comment: comment}));  
@@ -67,7 +67,7 @@
                      content += `<div class="comment">
                          <p>${commentsData[i].comment}</p>
                          <div class="commenter">
-                             ${commentsData[i].commenter} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()} 
+                             ${commentsData[i].username} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()} 
                          </div>
                      </div>`;
                  }
@@ -85,6 +85,4 @@
  
  // The first thing to do is to check if the user is logged in!
  loadLogin();
- 
- // Now this is something that we could have directly done on the server-side using templating too!
  loadComments();
