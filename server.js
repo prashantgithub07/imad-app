@@ -145,7 +145,7 @@ app.get('/check-login', function (req, res) {
            }
        });
    } else {
-       res.status(404).send('You are not Logged in');
+       res.status(400).send('You are not Logged in');
    }
 });
 
