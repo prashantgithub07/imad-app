@@ -1,48 +1,33 @@
-function loadLogin () {
-    
-// Check if the user is already logged in
-var checkRequest = new XMLHttpRequest();
-checkRequest.onreadystatechange = function (){
-  if(request.readyState === XMLHttpRequest.DONE) {
-      
-  }  
-};
- checkRequest.open('GET', '/check-login', true);
- checkRequest.send(null);
-}
+
+function loadLoginForm () {
 
 var loginHtml = `
-    <h3>Login/Register to unlock awesome features</h3>
+<h3>Login/Register to unlock awesome features</h3>
     <input type="text" id="username" placeholder="username" />
-    <input type="password" id="password" />
-    <br/>
-    <input type="submit" id="login_btn" value="Login" />
-    <input type="submit" id="register_btn" value="Register" />
-    `;
-document.getElementById('login_area').innerHTML = loginHtml;
-
-
-//submit username/password to login
-
-var submit = document.getElementById('login_btn');
-submit.onclick = function () {
-    // should make request to server and send name
-    // Capture a list of names and render it as a list
-    //create request object
     var request = new XMLHttpRequest();
+     <input type="password" id="password" />
+        <br/>
+        <input type="submit" id="login_btn" value="Login" />
+        <input type="submit" id="register_btn" value="Register" />
+        `;
+    document.getElementById('login_area').innerHTML = loginHtml;
     
     
-    //cpture the response and store it in variable
-    request.onreadystatechange = function () {
-      if (request.readyState === XMLHttpRequest.DONE) {
-          //Take some action
-          if (request.status === 200) {
-              console.log('user logged in');
-              alert('Login Sucessfully');
-          } else if (request.status === 403) {
-              alert('Username/Password is incorrect');
-          } else if (request.status === 500) {
-              alert('Something went Wrong on the server');
+    // Submit username/password to login
+   var submit = document.getElementById('login_btn');
+      submit.onclick = function () {
+         // Create a request object
+         var request = new XMLHttpRequest();
+            // Capture the response and store it in a variable
+           request.onreadystatechange = function () {
+         if (request.readyState === XMLHttpRequest.DONE) {
+         // Take some action
+         if (request.status === 200) {
+          alert('Logged in successfully');
+         } else if (request.status === 403) {
+         alert('Username/password is incorrect');
+         } else if (request.status === 500) {
+         alert('Something went wrong on the server');
           }
           submit.value = 'Login';
       } 
@@ -61,6 +46,7 @@ submit.onclick = function () {
     submit.value = 'Logging in...';
    
 };
+
 
 var register = document.getElementById('register_btn');
 register.onclick = function () {
@@ -91,3 +77,30 @@ register.onclick = function () {
     request.send(JSON.stringify({username: username, password: password}));        
     register.value = 'Rugistering...';
 };
+}
+
+function loadLoggedInUser (username) {
+    var loginArea = document.getElementById('login_area');
+    loginArea.innerHTML = `
+        <h3> Hi ${username} </h3>
+        <a href="/logout">Logout</a>
+    `;
+}
+ 
+ function loadLogin () {
+     // Check if the user is already logged in
+     var checkRequest = new XMLHttpRequest();
+     checkRequest.onreadystatechange = function () {
+         if (request.readyState === XMLHttpRequest.DONE) {
+             if (request.status === 200) {
+                 loadLoggedInUser(this.responseText);
+             } else {
+                 loadLoginForm();
+             }
+         }
+      };
+      checkRequest.open('GET', '/check-login', true);
+ checkRequest.send(null);
+ }
+ // The first thing to do is to check if the user is logged in!
+ loadLogin();
