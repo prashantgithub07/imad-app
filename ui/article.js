@@ -24,7 +24,7 @@
                  // Take some action
                  if (request.status === 200) {
                      // clear the form & reload all the comments
-                     document.getElementById('comment-text').value = '';
+                     document.getElementById('comment_text').value = '';
                      loadComments();    
                  } else {
                      alert('Error! Could not submit comment');
@@ -58,6 +58,16 @@
     request.send(null);
  }
  
+ 
+ function escapeHTML (text)
+ {
+     var $text = document.createTextNode(text);
+     var $div = document.createElement('div');
+     $div.appendChild($text);
+     return $div.innerHTML;
+ }
+ 
+ 
  function loadComments () {
          // Check if the user is already logged in
      var request = new XMLHttpRequest();
@@ -70,7 +80,7 @@
                 for (var i=0; i< commentsData.length; i++) {
                      var time = new Date(commentsData[i].timestamp);
                      content += `<div class="comment">
-                         <p>${commentsData[i].comment}</p>
+                          <p>${escapeHTML(commentsData[i].comment)}</p>
                          <div class="commenter">
                              ${commentsData[i].username} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()} 
                          </div>
