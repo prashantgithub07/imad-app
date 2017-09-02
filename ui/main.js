@@ -23,6 +23,7 @@ submit.onclick = function () {
           } else if (request.status === 500) {
               alert('Something went Wrong on the server');
           }
+          submit.value = 'Login';
       } 
       //not done yet
         
@@ -36,7 +37,7 @@ submit.onclick = function () {
     request.open('POST', 'http://pdbbhole.imad.hasura-app.io/login', true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));
-     
+    submit.value = 'Logging in...';
    
 };
 
@@ -54,6 +55,7 @@ register.onclick = function () {
           } else if (request.status === 500) {
               alert('Could not register the user');
           }
+          register.value = 'Register';
       }  
       // Not done yet
     };
@@ -66,4 +68,5 @@ register.onclick = function () {
     request.open('POST', 'http://coco98.imad.hasura-app.io/create-user', true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));        
+    register.value = 'Rugistering...';
 };
