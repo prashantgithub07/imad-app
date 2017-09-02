@@ -1,4 +1,4 @@
-// Eg: coco98.imad.hasura-app.io/articles/article-one will result in article-one
+// Eg: pdbbhole.imad.hasura-app.io/articles/article-one will result in article-one
  var currentArticleTitle = window.location.pathname.split('/')[2];
   		  
  function loadCommentForm () {
@@ -82,7 +82,7 @@
                      content += `<div class="comment">
                           <p>${escapeHTML(commentsData[i].comment)}</p>
                          <div class="commenter">
-                             ${commentsData[i].username} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()} 
+                            ${commentsData[i].username} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()} 
                          </div>
                      </div>`;
                  }
