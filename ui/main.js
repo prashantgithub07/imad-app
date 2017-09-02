@@ -6,7 +6,7 @@ var loginHtml = `
     <input type="text" id="username" placeholder="username" />
     var request = new XMLHttpRequest();
      <input type="password" id="password" />
-        <br/>
+        <br/><br/>
         <input type="submit" id="login_btn" value="Login" />
         <input type="submit" id="register_btn" value="Register" />
         `;
@@ -44,6 +44,7 @@ var loginHtml = `
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));
     submit.value = 'Logging in...';
+    loadLogin();
    
 };
 
@@ -90,7 +91,7 @@ function loadLoggedInUser (username) {
  function loadLogin () {
      // Check if the user is already logged in
      var request = new XMLHttpRequest();
-     checkRequest.onreadystatechange = function () {
+     request.onreadystatechange = function () {
          if (request.readyState === XMLHttpRequest.DONE) {
              if (request.status === 200) {
                  loadLoggedInUser(this.responseText);
@@ -99,8 +100,8 @@ function loadLoggedInUser (username) {
              }
          }
       };
-      checkRequest.open('GET', '/check-login', true);
- checkRequest.send(null);
+      request.open('GET', '/check-login', true);
+ request.send(null);
  }
  // The first thing to do is to check if the user is logged in!
  loadLogin();
