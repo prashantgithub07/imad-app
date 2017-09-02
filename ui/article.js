@@ -4,11 +4,12 @@
  function loadCommentForm () {
      var commentFormHtml = `
          <h5>Submit a comment</h5>
-         <textarea id="comment_text" placeholder="Enter your comment here..." />
+         <textarea id="comment_text" rows="5" cols="100" placeholder="Enter your comment here...">
+         </textarea>
          <input type="submit" id="submit" value="Submit" />
          <br/>
          `;
-     document.getElementById('comment_form').innerHTML = loginHtml;
+    document.getElementById('comment_form').innerHTML = commentFormHtml;
      
      // Submit username/password to login
      var submit = document.getElementById('submit');
